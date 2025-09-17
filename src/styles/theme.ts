@@ -143,33 +143,101 @@ export const lightThemeOverrides: GlobalThemeOverrides = {
   }
 }
 
+// 暗色主题颜色定义
+export const darkDesignTokens = {
+  colors: {
+    // 主色调 - 科技蓝（暗色模式下更亮）
+    primary: '#60A5FA',
+    primaryHover: '#3B82F6',
+    primaryPressed: '#2563EB',
+    primarySuppl: '#93C5FD',
+
+    // 成功色
+    success: '#34D399',
+    successHover: '#10B981',
+    successPressed: '#059669',
+    successSuppl: '#6EE7B7',
+
+    // 警告色
+    warning: '#FBBF24',
+    warningHover: '#F59E0B',
+    warningPressed: '#D97706',
+    warningSuppl: '#FCD34D',
+
+    // 危险色
+    error: '#F87171',
+    errorHover: '#EF4444',
+    errorPressed: '#DC2626',
+    errorSuppl: '#FCA5A5',
+
+    // 信息色
+    info: '#9CA3AF',
+    infoHover: '#6B7280',
+    infoPressed: '#4B5563',
+    infoSuppl: '#D1D5DB'
+  },
+  neutrals: {
+    white: '#0F172A',
+    gray50: '#1E293B',
+    gray100: '#334155',
+    gray200: '#475569',
+    gray300: '#64748B',
+    gray400: '#94A3B8',
+    gray500: '#CBD5E1',
+    gray600: '#E2E8F0',
+    gray700: '#F1F5F9',
+    gray800: '#F8FAFC',
+    gray900: '#FFFFFF'
+  }
+}
 // 暗色主题覆盖配置
 export const darkThemeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: designTokens.colors.primary,
-    primaryColorHover: designTokens.colors.primaryHover,
-    primaryColorPressed: designTokens.colors.primaryPressed,
-    primaryColorSuppl: designTokens.colors.primarySuppl,
+    primaryColor: darkDesignTokens.colors.primary,
+    primaryColorHover: darkDesignTokens.colors.primaryHover,
+    primaryColorPressed: darkDesignTokens.colors.primaryPressed,
+    primaryColorSuppl: darkDesignTokens.colors.primarySuppl,
 
-    successColor: designTokens.colors.success,
-    successColorHover: designTokens.colors.successHover,
-    successColorPressed: designTokens.colors.successPressed,
-    successColorSuppl: designTokens.colors.successSuppl,
+    successColor: darkDesignTokens.colors.success,
+    successColorHover: darkDesignTokens.colors.successHover,
+    successColorPressed: darkDesignTokens.colors.successPressed,
+    successColorSuppl: darkDesignTokens.colors.successSuppl,
 
-    warningColor: designTokens.colors.warning,
-    warningColorHover: designTokens.colors.warningHover,
-    warningColorPressed: designTokens.colors.warningPressed,
-    warningColorSuppl: designTokens.colors.warningSuppl,
+    warningColor: darkDesignTokens.colors.warning,
+    warningColorHover: darkDesignTokens.colors.warningHover,
+    warningColorPressed: darkDesignTokens.colors.warningPressed,
+    warningColorSuppl: darkDesignTokens.colors.warningSuppl,
 
-    errorColor: designTokens.colors.error,
-    errorColorHover: designTokens.colors.errorHover,
-    errorColorPressed: designTokens.colors.errorPressed,
-    errorColorSuppl: designTokens.colors.errorSuppl,
+    errorColor: darkDesignTokens.colors.error,
+    errorColorHover: darkDesignTokens.colors.errorHover,
+    errorColorPressed: darkDesignTokens.colors.errorPressed,
+    errorColorSuppl: darkDesignTokens.colors.errorSuppl,
 
-    infoColor: designTokens.colors.info,
-    infoColorHover: designTokens.colors.infoHover,
-    infoColorPressed: designTokens.colors.infoPressed,
-    infoColorSuppl: designTokens.colors.infoSuppl,
+    infoColor: darkDesignTokens.colors.info,
+    infoColorHover: darkDesignTokens.colors.infoHover,
+    infoColorPressed: darkDesignTokens.colors.infoPressed,
+    infoColorSuppl: darkDesignTokens.colors.infoSuppl,
+
+    // 背景色
+    bodyColor: darkDesignTokens.neutrals.white,
+    popoverColor: darkDesignTokens.neutrals.gray50,
+    cardColor: darkDesignTokens.neutrals.gray50,
+    modalColor: darkDesignTokens.neutrals.gray50,
+
+    // 边框色
+    borderColor: darkDesignTokens.neutrals.gray200,
+    dividerColor: darkDesignTokens.neutrals.gray200,
+
+    // 文本色
+    textColorBase: darkDesignTokens.neutrals.gray900,
+    textColor1: darkDesignTokens.neutrals.gray900,
+    textColor2: darkDesignTokens.neutrals.gray700,
+    textColor3: darkDesignTokens.neutrals.gray600,
+    textColorDisabled: darkDesignTokens.neutrals.gray400,
+
+    // 输入框背景
+    inputColor: darkDesignTokens.neutrals.gray100,
+    inputColorDisabled: darkDesignTokens.neutrals.gray50,
 
     // 字体
     fontFamily: designTokens.typography.fontFamily,

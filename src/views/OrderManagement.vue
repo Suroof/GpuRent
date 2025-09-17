@@ -156,28 +156,28 @@ const statsCards = computed(() => [
   {
     key: 'total',
     title: '总订单数',
-    value: stats.value.totalOrders,
+    value: stats.value.totalOrders || 0,
     icon: Receipt,
     color: '#3b82f6'
   },
   {
     key: 'revenue',
     title: '总收入',
-    value: `¥${stats.value.totalRevenue.toLocaleString()}`,
+    value: `¥${(stats.value.totalRevenue || 0).toLocaleString()}`,
     icon: Money,
     color: '#10b981'
   },
   {
     key: 'pending',
     title: '待支付',
-    value: stats.value.pendingOrders,
+    value: stats.value.pendingOrders || 0,
     icon: Clock,
     color: '#f59e0b'
   },
   {
     key: 'paid',
     title: '已支付',
-    value: stats.value.paidOrders,
+    value: stats.value.paidOrders || 0,
     icon: Check,
     color: '#06b6d4'
   }
@@ -506,5 +506,75 @@ onMounted(() => {
 
 .filter-section {
   margin-bottom: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-section :deep(.n-space) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-management {
+    padding: 0;
+  }
+
+  .page-header {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    margin: 0 16px 24px;
+    gap: 16px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  .filter-section {
+    margin: 0 16px 16px;
+  }
+
+  /* 移动端表格滚动 */
+  .orders-table :deep(.n-data-table-wrapper) {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 18px;
+  }
+
+  .page-description {
+    font-size: 12px;
+  }
+
+  .stats-grid,
+  .filter-section {
+    margin: 0 12px 16px;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
 }
 </style>

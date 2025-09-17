@@ -406,4 +406,54 @@ onMounted(() => {
 .filter-section {
   margin-bottom: 16px;
 }
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .filter-section :deep(.n-space) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-section :deep(.n-space > *) {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .instance-management {
+    padding: 0;
+  }
+
+  .page-header {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .filter-section {
+    margin: 0 16px 16px;
+  }
+
+  /* 移动端表格滚动 */
+  .instances-table :deep(.n-data-table-wrapper) {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 18px;
+  }
+
+  .page-description {
+    font-size: 12px;
+  }
+
+  .filter-section {
+    margin: 0 12px 16px;
+  }
+}
 </style>

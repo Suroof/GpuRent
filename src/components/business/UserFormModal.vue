@@ -1,5 +1,10 @@
 <template>
-  <NModal v-model:show="visible" preset="dialog" title="用户表单">
+  <NModal
+    v-model:show="modalVisible"
+    preset="dialog"
+    title="用户表单"
+    :class="`user-form-modal ${globalStore.themeClass}`"
+  >
     <template #header>
       <div>{{ isEdit ? '编辑用户' : '添加用户' }}</div>
     </template>
@@ -64,6 +69,7 @@ import {
   type FormRules
 } from 'naive-ui'
 import { UserAPI } from '@/api/user'
+import { useGlobalStore } from '@/stores/global'
 import type { User, CreateUserData, UpdateUserData } from '@/api/types'
 
 interface Props {
@@ -79,11 +85,18 @@ const emit = defineEmits<{
 }>()
 
 const message = useMessage()
+const globalStore = useGlobalStore()
 const formRef = ref<FormInst>()
 const submitting = ref(false)
 
 // 计算属性
 const isEdit = computed(() => !!props.user)
+
+// 处理 modal 显示状态
+const modalVisible = computed({
+  get: () => props.visible,
+  set: (value: boolean) => emit('update:visible', value)
+})
 
 // 表单数据
 const formData = ref({
@@ -217,5 +230,151 @@ const handleSubmit = async () => {
 <style scoped>
 :deep(.n-form-item-label) {
   font-weight: 500;
+}
+
+/* 主题适配样式 */
+.user-form-modal {
+  transition: all 0.3s ease;
+}
+
+/* 亮色主题 */
+.user-form-modal.light :deep(.n-modal) {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.user-form-modal.light :deep(.n-form-item-label) {
+  color: #334155;
+}
+
+.user-form-modal.light :deep(.n-input) {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.user-form-modal.light :deep(.n-input:hover) {
+  border-color: #3b82f6;
+}
+
+.user-form-modal.light :deep(.n-input:focus) {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.user-form-modal.light :deep(.n-select) {
+  background-color: #ffffff;
+}
+
+/* 暗色主题 */
+.user-form-modal.dark :deep(.n-modal) {
+  background-color: #1e293b;
+  border: 1px solid #475569;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+.user-form-modal.dark :deep(.n-card__header) {
+  background-color: #1e293b;
+  border-bottom: 1px solid #475569;
+}
+
+.user-form-modal.dark :deep(.n-card__content) {
+  background-color: #1e293b;
+}
+
+.user-form-modal.dark :deep(.n-card__action) {
+  background-color: #1e293b;
+  border-top: 1px solid #475569;
+}
+
+.user-form-modal.dark :deep(.n-form-item-label) {
+  color: #f1f5f9;
+}
+
+.user-form-modal.dark :deep(.n-input) {
+  background-color: #334155;
+  border-color: #64748b;
+  color: #f1f5f9;
+}
+
+.user-form-modal.dark :deep(.n-input::placeholder) {
+  color: #94a3b8;
+}
+
+.user-form-modal.dark :deep(.n-input:hover) {
+  border-color: #60a5fa;
+  background-color: #475569;
+}
+
+.user-form-modal.dark :deep(.n-input:focus) {
+  border-color: #60a5fa;
+  background-color: #475569;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+.user-form-modal.dark :deep(.n-base-selection) {
+  background-color: #334155;
+  border-color: #64748b;
+}
+
+.user-form-modal.dark :deep(.n-base-selection:hover) {
+  border-color: #60a5fa;
+  background-color: #475569;
+}
+
+.user-form-modal.dark :deep(.n-base-selection:focus) {
+  border-color: #60a5fa;
+  background-color: #475569;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+.user-form-modal.dark :deep(.n-base-selection-label) {
+  color: #f1f5f9;
+}
+
+.user-form-modal.dark :deep(.n-base-selection-placeholder) {
+  color: #94a3b8;
+}
+
+/* 按钮主题适配 */
+.user-form-modal.dark :deep(.n-button--default) {
+  background-color: #475569;
+  border-color: #64748b;
+  color: #f1f5f9;
+}
+
+.user-form-modal.dark :deep(.n-button--default:hover) {
+  background-color: #64748b;
+  border-color: #94a3b8;
+}
+
+.user-form-modal.dark :deep(.n-button--primary) {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.user-form-modal.dark :deep(.n-button--primary:hover) {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+/* 模态框头部和标题 */
+.user-form-modal.dark :deep(.n-dialog__title) {
+  color: #f1f5f9;
+}
+
+.user-form-modal.dark :deep(.n-dialog__content) {
+  color: #e2e8f0;
+}
+
+/* 动画过渡 */
+.user-form-modal :deep(.n-input),
+.user-form-modal :deep(.n-base-selection),
+.user-form-modal :deep(.n-button) {
+  transition: all 0.3s ease;
 }
 </style>

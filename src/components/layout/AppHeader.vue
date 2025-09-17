@@ -87,6 +87,8 @@ import {
   LogOut as LogoutOutlined,
   Grid as DashboardOutlined
 } from '@vicons/ionicons5'
+import { useGlobalStore } from '@/stores/global'
+import { useUserStore } from '@/stores/user'
 
 // 组件事件定义
 defineEmits<{
@@ -96,9 +98,11 @@ defineEmits<{
 const router = useRouter()
 const route = useRoute()
 const message = useMessage()
+const globalStore = useGlobalStore()
+const userStore = useUserStore()
 
-// 主题切换状态
-const isDark = ref(false)
+// 使用全局状态的主题
+const isDark = computed(() => globalStore.theme === 'dark')
 
 // 通知数量
 const notificationCount = ref(5)
@@ -106,14 +110,8 @@ const notificationCount = ref(5)
 // 默认头像
 const defaultAvatar = 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
 
-// 模拟当前用户信息
-const currentUser = ref({
-  id: '1',
-  username: 'admin',
-  email: 'admin@example.com',
-  avatar: 'https://avatars.githubusercontent.com/u/1?v=4',
-  role: 'admin'
-})
+// 使用用户状态管理的当前用户信息
+const currentUser = computed(() => userStore.user)
 
 // 面包屑路由配置类型
 interface BreadcrumbRoute {
@@ -211,9 +209,8 @@ const handleBreadcrumbClick = (item: any) => {
 
 // 主题切换
 const toggleTheme = () => {
-  isDark.value = !isDark.value
-  message.info(isDark.value ? '已切换到暗色主题' : '已切换到亮色主题')
-  // TODO: 实际的主题切换逻辑
+  globalStore.toggleTheme()
+  message.info(globalStore.theme === 'dark' ? '已切换到暗色主题' : '已切换到亮色主题')
 }
 
 // 用户菜单选择处理
@@ -232,15 +229,17 @@ const handleUserMenuSelect = (key: string) => {
 }
 
 // 退出登录
-const handleLogout = () => {
-  // 清除用户信息
-  localStorage.removeItem('access_token')
-  localStorage.removeItem('user_info')
-
-  message.success('已退出登录')
-
-  // 跳转到登录页（这里暂时跳转到首页）
-  router.push({ name: 'dashboard' })
+const handleLogout = async () => {
+  try {
+    globalStore.setLoading(true)
+    await userStore.logout()
+    message.success('已退出登录')
+    router.push({ name: 'dashboard' })
+  } catch (error) {
+    message.error('退出登录失败')
+  } finally {
+    globalStore.setLoading(false)
+  }
 }
 </script>
 
