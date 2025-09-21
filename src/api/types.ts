@@ -1,5 +1,3 @@
-// API类型定义
-
 // 通用响应类型
 export interface ApiResponse<T = any> {
   code: number
