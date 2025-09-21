@@ -16,16 +16,16 @@
         <div class="login-header">
           <div class="logo-area">
             <div class="logo-icon">
-              <img src="@/assets/img/logo.svg" alt="" />
+              <ServerOutlined />
             </div>
-            <h1>登录</h1>
+            <h1>GPU</h1>
           </div>
           <p>请登录您的管理账户</p>
         </div>
 
         <form @submit.prevent="handleLogin" class="login-form">
           <div class="form-group">
-            <label>用户名</label>
+            <label>User name</label>
             <div class="input-wrapper">
               <i class="fas fa-user"></i>
               <input
@@ -40,7 +40,7 @@
           </div>
 
           <div class="form-group">
-            <label>密码</label>
+            <label>Password</label>
             <div class="input-wrapper">
               <i class="fas fa-lock"></i>
               <input
@@ -62,18 +62,23 @@
             <label class="remember-me">
               <input type="checkbox" v-model="form.remember" />
               <span class="checkmark"></span>
-              <span>记住我</span>
+              <span>Remember me</span>
             </label>
-            <a href="#" class="forgot-password">忘记密码？</a>
+            <a href="#" class="forgot-password">Forgot password?</a>
           </div>
 
-          <button type="submit" class="login-button" :class="{ loading: isLoading }">
-            <span v-if="!isLoading">登录</span>
-            <span v-else class="loading-text">
-              <i class="fas fa-spinner fa-spin"></i>
-              登录中...
-            </span>
-          </button>
+          <div class="button-group">
+            <button type="submit" class="login-button" :class="{ loading: isLoading }">
+              <span v-if="!isLoading">Login</span>
+              <span v-else class="loading-text">
+                <i class="fas fa-spinner fa-spin"></i>
+                Logining...
+              </span>
+            </button>
+            <button type="submit" class="register-button">
+              <span>Register</span>
+            </button>
+          </div>
         </form>
       </div>
 
@@ -140,6 +145,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { Server as ServerOutlined } from '@vicons/ionicons5'
 
 const router = useRouter()
 const showPassword = ref(false)
@@ -234,7 +240,7 @@ const handleLogin = async () => {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  animation: float 20s infinite;
+  animation: float 10s infinite;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -302,7 +308,7 @@ const handleLogin = async () => {
   flex: 1;
   max-width: 450px;
   height: 552px;
-  background: rgba(20, 20, 20, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 48px;
@@ -342,12 +348,11 @@ const handleLogin = async () => {
 .logo-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #333333, #555555);
   border-radius: 12px;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .logo-icon i {
@@ -360,14 +365,14 @@ const handleLogin = async () => {
   font-size: 28px;
   font-weight: 700;
   margin: 0;
-  background: linear-gradient(135deg, #ffffff, #e5e5e5);
+  background: linear-gradient(135deg, #000000, #b2b2b2, #000000);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .login-header p {
-  color: #b0b0b0;
+  color: #000000;
   font-size: 16px;
   margin: 0;
   font-weight: 400;
@@ -381,7 +386,7 @@ const handleLogin = async () => {
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #e5e5e5;
+  color: #000000;
   font-weight: 500;
   font-size: 14px;
 }
@@ -401,7 +406,7 @@ const handleLogin = async () => {
   left: 0;
   width: 0;
   height: 1px;
-  background: #ffffff;
+  background: linear-gradient(135deg, #eda4a4 0%, #bd8bff 50%, #6a8bff 100%);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -425,13 +430,13 @@ const handleLogin = async () => {
 
 .input-wrapper input {
   width: 100%;
-  padding: 16px 0 12px 48px;
+  padding: 16px 0 12px 11px;
   border: 0;
   border-bottom: 1px solid #444444;
   border-radius: 0;
   font-size: 16px;
   background: transparent;
-  color: #ffffff;
+  color: #000000;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
   box-shadow: none;
@@ -483,7 +488,7 @@ const handleLogin = async () => {
   align-items: center;
   cursor: pointer;
   font-size: 14px;
-  color: #e5e5e5;
+  color: #000000;
   gap: 8px;
 }
 
@@ -501,8 +506,8 @@ const handleLogin = async () => {
 }
 
 .remember-me input[type='checkbox']:checked + .checkmark {
-  background: #ffffff;
-  border-color: #ffffff;
+  background: #000000;
+  border-color: #000000;
 }
 
 .remember-me input[type='checkbox']:checked + .checkmark::after {
@@ -511,13 +516,13 @@ const handleLogin = async () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #000000;
+  color: #ffffff;
   font-size: 12px;
   font-weight: bold;
 }
 
 .forgot-password {
-  color: #cccccc;
+  color: #b2b2b2;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -525,25 +530,35 @@ const handleLogin = async () => {
 }
 
 .forgot-password:hover {
-  color: #ffffff;
+  color: #000000;
   text-decoration: underline;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
 }
 
 /* 登录按钮 */
 .login-button {
   width: 100%;
-  padding: 16px;
-  background: linear-gradient(135deg, #ffffff 0%, #e5e5e5 100%);
-  color: #000000;
+  padding: 11px;
+  background: linear-gradient(135deg, #eda4a4 0%, #bd8bff 50%, #6a8bff 100%);
+  color: #ffffff;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   margin-bottom: 24px;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 .login-button::before {
@@ -562,7 +577,7 @@ const handleLogin = async () => {
   box-shadow:
     0 12px 24px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.2);
-  background: linear-gradient(135deg, #f5f5f5 0%, #d5d5d5 100%);
+  background: linear-gradient(135deg, #eda4a4 0%, #bd8bff 50%, #6a8bff 100%);
 }
 
 .login-button:hover::before {
@@ -576,6 +591,42 @@ const handleLogin = async () => {
 .login-button.loading {
   pointer-events: none;
   opacity: 0.8;
+}
+
+.register-button {
+  width: 100%;
+  padding: 11px;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 2px solid #d7d7d7;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.register-button:hover {
+  transform: translateY(-2px);
+}
+
+/* 登录页面 */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #eda4a4 0%, #bd8bff 50%, #6a8bff 100%);
+  overflow: hidden;
+}
+
+/* 登录表单 */
+.login-form {
+  display: flex;
+  flex-direction: column;
 }
 
 .loading-text {
