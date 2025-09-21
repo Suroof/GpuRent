@@ -1,5 +1,5 @@
 <template>
-  <div class="app-header">
+  <div class="app-header" :class="globalStore.themeClass">
     <div class="header-left">
       <NButton text type="primary" class="collapse-btn" @click="$emit('toggleCollapsed')">
         <template #icon>
@@ -249,7 +249,51 @@ const handleLogout = async () => {
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  width: 100%;
   background: white;
+  transition: background-color 0.3s ease;
+}
+
+/* 亮色主题 */
+.app-header.light {
+  background: white;
+}
+
+.app-header.light .header-action:hover {
+  background-color: #f5f5f5;
+}
+
+.app-header.light .user-info:hover {
+  background-color: #f5f5f5;
+}
+
+.app-header.light .username {
+  color: #333;
+}
+
+.app-header.light .dropdown-icon {
+  color: #999;
+}
+
+/* 暗色主题 */
+.app-header.dark {
+  background: #1e293b;
+}
+
+.app-header.dark .header-action:hover {
+  background-color: #334155;
+}
+
+.app-header.dark .user-info:hover {
+  background-color: #334155;
+}
+
+.app-header.dark .username {
+  color: #f1f5f9;
+}
+
+.app-header.dark .dropdown-icon {
+  color: #94a3b8;
 }
 
 .header-left {
@@ -279,10 +323,6 @@ const handleLogout = async () => {
   transition: background-color 0.2s;
 }
 
-.header-action:hover {
-  background-color: #f5f5f5;
-}
-
 .user-info {
   display: flex;
   align-items: center;
@@ -293,22 +333,19 @@ const handleLogout = async () => {
   transition: background-color 0.2s;
 }
 
-.user-info:hover {
-  background-color: #f5f5f5;
-}
-
 .username {
   font-size: 14px;
-  color: #333;
   max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .dropdown-icon {
-  color: #999;
-  transition: transform 0.2s;
+  transition:
+    transform 0.2s,
+    color 0.3s ease;
 }
 
 .user-info:hover .dropdown-icon {

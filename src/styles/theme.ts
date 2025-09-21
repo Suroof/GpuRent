@@ -252,6 +252,27 @@ export const darkThemeOverrides: GlobalThemeOverrides = {
 
     // 行高
     lineHeight: '1.6'
+  },
+  Menu: {
+    color: darkDesignTokens.neutrals.gray50,
+    itemTextColor: darkDesignTokens.neutrals.gray700,
+    itemTextColorHover: darkDesignTokens.neutrals.gray900,
+    itemTextColorActive: darkDesignTokens.colors.primary,
+    itemColorHover: darkDesignTokens.neutrals.gray100,
+    itemColorActive: `${darkDesignTokens.colors.primary}20`,
+    itemIconColor: darkDesignTokens.neutrals.gray600,
+    itemIconColorHover: darkDesignTokens.neutrals.gray800,
+    itemIconColorActive: darkDesignTokens.colors.primary,
+    groupTextColor: darkDesignTokens.neutrals.gray500,
+    arrowColor: darkDesignTokens.neutrals.gray600,
+    arrowColorHover: darkDesignTokens.neutrals.gray800,
+    arrowColorActive: darkDesignTokens.colors.primary
+  },
+  Breadcrumb: {
+    itemTextColor: darkDesignTokens.neutrals.gray600,
+    itemTextColorHover: darkDesignTokens.neutrals.gray800,
+    itemTextColorPressed: darkDesignTokens.neutrals.gray900,
+    separatorColor: darkDesignTokens.neutrals.gray500
   }
 }
 

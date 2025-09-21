@@ -1,5 +1,5 @@
 <template>
-  <div class="app-sidebar">
+  <div class="app-sidebar" :class="globalStore.themeClass">
     <!-- Logo区域 -->
     <div class="sidebar-logo">
       <div class="logo-container">
@@ -40,6 +40,7 @@ import {
   Settings as SettingOutlined,
   Server as ServerOutlined
 } from '@vicons/ionicons5'
+import { useGlobalStore } from '@/stores/global'
 
 interface Props {
   collapsed: boolean
@@ -49,6 +50,7 @@ defineProps<Props>()
 
 const router = useRouter()
 const route = useRoute()
+const globalStore = useGlobalStore()
 
 // 当前激活的菜单项
 const activeKey = computed(() => route.name as string)
@@ -124,6 +126,33 @@ const handleMenuSelect = (key: string) => {
 .app-sidebar {
   height: 100%;
   background: white;
+  transition: background-color 0.3s ease;
+}
+
+/* 亮色主题 */
+.app-sidebar.light {
+  background: white;
+}
+
+.app-sidebar.light .sidebar-logo {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.app-sidebar.light .logo-text {
+  color: #1f2937;
+}
+
+/* 暗色主题 */
+.app-sidebar.dark {
+  background: #1e293b;
+}
+
+.app-sidebar.dark .sidebar-logo {
+  border-bottom: 1px solid #475569;
+}
+
+.app-sidebar.dark .logo-text {
+  color: #f1f5f9;
 }
 
 .sidebar-logo {
@@ -131,7 +160,7 @@ const handleMenuSelect = (key: string) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #f0f0f0;
+  transition: border-color 0.3s ease;
 }
 
 .logo-container {
@@ -150,8 +179,8 @@ const handleMenuSelect = (key: string) => {
 .logo-text {
   font-size: 18px;
   font-weight: 600;
-  color: #1f2937;
   white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .logo-text-enter-active,
